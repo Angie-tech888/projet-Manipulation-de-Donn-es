@@ -1,0 +1,54 @@
+def afficher_menu():
+    print("\n--- MON GESTIONNAIRE DE TÂCHES ---")
+    print("1. Voir les tâches")
+    print("2. Ajouter une tâche")
+    print("3. Supprimer une tâche")
+    print("4. Quitter")
+
+def gestionnaire():
+    taches = []  # Notre liste qui stockera les tâches
+    
+    while True:
+        afficher_menu()
+        choix = input("\nChoisissez une option (1-4) : ")
+
+        if choix == "1":
+            if not taches:
+                print("\nLa liste est vide.")
+            else:
+                print("\nTes tâches en cours :")
+                for index, tache in enumerate(taches, start=1):
+                    print(f"{index}. {tache}")
+
+        elif choix == "2":
+            nouvelle_tache = input("Entrez la tâche à ajouter : ")
+            taches.append(nouvelle_tache)
+            print("Tâche ajoutée !")
+
+        elif choix == "3":
+            if not taches:
+                print("\nRien à supprimer.")
+            else:
+                # On affiche la liste pour que l'utilisateur sache quel numéro choisir
+                for index, tache in enumerate(taches, start=1):
+                    print(f"{index}. {tache}")
+                
+                try:
+                    num = int(input("Numéro de la tâche à supprimer : "))
+                    if 1 <= num <= len(taches):
+                        supprimee = taches.pop(num - 1)
+                        print(f"Tâche '{supprimee}' supprimée.")
+                    else:
+                        print("Numéro invalide.")
+                except ValueError:
+                    print("Erreur : Veuillez entrer un chiffre.")
+
+        elif choix == "4":
+            print("Au revoir !")
+            break
+        else:
+            print("Option invalide, réessayez.")
+
+# Lancer le programme
+if __name__ == "__main__":
+    gestionnaire()
